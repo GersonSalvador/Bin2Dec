@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bin2Dec</title>
+  <style>
+    /*
+    *  html5resetcss
+    */
+    html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+    body{line-height:1}
+    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+    nav ul{list-style:none}
+    blockquote,q{quotes:none}
+    blockquote:before,blockquote:after,q:before,q:after{content:none}
+    a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+    ins{background-color:#ff9;color:#000;text-decoration:none}
+    mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+    del{text-decoration:line-through}
+    abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+    table{border-collapse:collapse;border-spacing:0}
+    hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+    input,select{vertical-align:middle}
+    body{
+      background-color: #f0f0f0;
+      font-size: 1.2em;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    header,footer{
+      text-align: center;
+      padding: 20px;
+    }
+    h1{
+      font-size: 1.8em;
+      font-family: 'Trebuchet MS', sans-serif;
+      margin-bottom: 20px;
+    }
+    main{
+      display: flex;
+      justify-content: center;
+      height: calc(100vh - 172px);
+      align-items: center;
+    }
+    form{
+      width: 100%;
+      max-width: 600px;
+    }
+    label{
+      display: block;
+      margin-bottom: 10px;
+    }
+    main div + div{
+      margin-top: 40px;
+    }
+    textarea{
+      width: 100%;
+      resize: none;
+      padding: 10px;
+    }
+    textarea:read-only{
+      background-color: rgba(255,255,255,.5);
+      outline: none;
+    }
+    a{
+      color: #808080;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Bin2Dec</h1>
+    <span>Enter up to 8 binary digits, we do the magic</span>
+  </header>
+  <main>
+    <form>
+      <div>
+        <label for="binaryField">Binary Field</label>
+        <textarea name="binaryField" id="binaryField" onkeyup="run()" rows="10"></textarea>
+      </div>
+      <div>
+        <label>Result:</label>
+        <textarea name="binaryResult" id="binaryResult" rows="10" readonly></textarea>
+      </div>
+    </form>
+  </main>
+  <footer>
+    <span>
+      App created based in <a href="https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Bin2Dec-App.md" target="_blank">
+        Bin2Dec on GitHub
+      </a> by <a href="https://github.com/gersonsalvador" target="_blank">Gerson Salvador</a>
+    </span>
+  </footer>
+  <script>
+    const run = () => {
+      let binaryFieldValue = document.getElementById('binaryField').value
+      let result;
+      if(!binaryFieldValue.length)
+        result = ''
+      else if(!!binaryFieldValue.match(/^[0-1\n]+$/gi)){
+        result = binaryFieldValue
+          .split("\n")
+          .map(arr => !arr.length
+            ? ''
+            : arr.split('').map(
+              (v, i, arr) => (parseInt(v) * Math.pow(2,arr.length - i - 1))
+              ).reduce((t,v) => t + v)
+          )
+          .join("\n")
+      }else
+        result = 'Enter only binary numbers. Add new rows for more binary numbers.';
+
+      let binaryResult = document.getElementById('binaryResult').value = result
+    }
+  </script>
+</body>
+</html>
