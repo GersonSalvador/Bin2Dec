@@ -91,6 +91,7 @@
       </a> by <a href="https://github.com/gersonsalvador" target="_blank">Gerson Salvador</a>
     </span>
   </footer>
+
   <script>
     const run = () => {
       let binaryFieldValue = document.getElementById('binaryField').value
@@ -110,7 +111,7 @@
       }else
         result = 'Enter only binary numbers. Add new rows for more binary numbers.';
 
-      let binaryResult = document.getElementById('binaryResult').value = result
+      document.getElementById('binaryResult').value = result
     }
   </script>
 </body>
